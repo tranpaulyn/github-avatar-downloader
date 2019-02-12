@@ -1,9 +1,9 @@
 var request = require('request');
 var fs = require('fs');
-var repo = process.argv.slice(2)
-
+var repo = process.argv.slice(2);
 var owner = repo[0];
 var name = repo[1];
+
 console.log('Welcome to the GitHub Avatar Downloader!');
 
 var token = require('./secrets.js')
@@ -11,7 +11,6 @@ var token = require('./secrets.js')
 
 // Use the request library to progromatically fetch the list of contributors via HTTPS for the given repo
 // the callback handles asynchronous nature of results that are returned from getRepoContributors
-
 
 if (owner === [] || name === []) { // If no arguments entered break. 
 console.log("Please enter repository information")
@@ -34,7 +33,6 @@ console.log("Please enter repository information")
 function downloadImageByURL(url, filePath) {
     request.get(url)
         .on('response', function(res) {
-            // console.log(res)
         })
         .pipe(fs.createWriteStream(filePath))
 }
@@ -43,7 +41,6 @@ function downloadImageByURL(url, filePath) {
 getRepoContributors(owner, name, function(err, result) {
     console.log("Errors:", err);
     console.log("Please enter valid information")
-    // console.log("Result:", result);
     // accessing the object
     // going through every user access the user avatar url
     for (var i = 0; i < result.length; i++) {
