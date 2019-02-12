@@ -13,7 +13,7 @@ var token = require('./secrets.js')
 // the callback handles asynchronous nature of results that are returned from getRepoContributors
 
 
-if (owner === [] || name === []) {
+if (owner === [] || name === []) { // If no arguments entered break. 
 console.log("Please enter repository information")
 } else {
     function getRepoContributors(repoOwner, repoName, cb) {
@@ -28,9 +28,7 @@ console.log("Please enter repository information")
         request(options, function(err, res, body) {
             cb(err, JSON.parse(body));
         });
-        
     }    
-
 }
 
 function downloadImageByURL(url, filePath) {
