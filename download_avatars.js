@@ -1,4 +1,5 @@
 var request = require('request');
+var fs = require('fs');
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -21,17 +22,25 @@ function getRepoContributors(repoOwner, repoName, cb) {
     
 }
 
+function downloadImageByURL(url, filePath) {
+    request.get(url)
+        .on('response', function(res) {
+            console.log(res)
+        })
+        .pipe(fs.createWriteStream(filePath))
+}
+
 
 getRepoContributors("jquery", "jquery", function(err, result) {
     console.log("Errors:", err);
-    console.log("Result:", result);
+    // console.log("Result:", result);
     // accessing the object
-    var user = []
     // going through every user access the user avatar url
     for (var i = 0; i < result.length; i++) {
-        user = result[i].login;
-        var avatarURL = result[i].avatar_url;
-        console.log(user);
-        console.log(avatarURL);
+        // var avatarURL = result[i].avatar_url;
+        console.log("Contributor:", result[i].login);
+        console.log("Avatar Image URL:", result[i].avatar_url);
     }
   });
+  
+downloadImageByURL("https://avatars1.githubusercontent.com/u/43004?v=4", "avatars/pbakaus.jpg")
