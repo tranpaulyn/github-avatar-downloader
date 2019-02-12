@@ -37,10 +37,12 @@ getRepoContributors("jquery", "jquery", function(err, result) {
     // accessing the object
     // going through every user access the user avatar url
     for (var i = 0; i < result.length; i++) {
-        // var avatarURL = result[i].avatar_url;
+        var avatarURL = result[i].avatar_url;
+        var contributor = result[i].login;
+        var filePath = 'avatars/' + contributor + '.jpg';
         console.log("Contributor:", result[i].login);
-        console.log("Avatar Image URL:", result[i].avatar_url);
+        console.log("Avatar Image URL:", avatarURL);
+    downloadImageByURL(avatarURL, filePath);
     }
   });
   
-downloadImageByURL("https://avatars1.githubusercontent.com/u/43004?v=4", "avatars/pbakaus.jpg")
